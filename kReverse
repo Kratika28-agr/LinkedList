@@ -1,0 +1,44 @@
+In this we have to do 2 things:
+ 1. reverse smaller linked list
+ 2.then connect those smaller LL
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        //base case
+        if(checkLength(head,k)) return head;
+        
+        // reverse first k  nodes
+        ListNode previous=null;
+        ListNode current =head;
+        ListNode nextNode=null;
+        int count=0;
+        
+        while(current!=null && count<k){
+            //store next
+            nextNode=current.next;
+            //update current
+            current.next=previous;
+            //previous and current
+            previous=current;
+            current=nextNode;
+            count++;
+        }
+       // the head of the original list will now be the tail of the reversed linked list of size k
+ // and the next of that head is recursively assigned to what the function returns previous
+        if(nextNode != null){
+            head.next=reverseKGroup(nextNode , k);
+        }
+        return previous;
+    }
+    // to check the remaining size of list is less than k
+    //to check whether we need to reverse  list or not
+    public boolean checkLength(ListNode head, int k){
+        ListNode start=head;
+        int size=0;
+        while(start != null){
+            start=start.next;
+            size++;
+        }
+        return size<k;
+    }
+}
