@@ -1,0 +1,55 @@
+TC=O(NLogN)
+Three steps for MergeSort:
+1.finding middle element takes KN
+2.Sorting two parts  2T(N/2)
+3.Merging two parts of LL takes KN
+
+class Solution {
+    //function to merge two LL
+     public ListNode merge(ListNode a, ListNode b){
+         //base case
+         if(a == null) return b;
+         if(b== null) return a;
+         
+         //rec case
+         ListNode c=null;
+         if(a.val < b.val){
+             c=a;
+             c.next=merge(a.next,b);
+         }
+         else{
+              c=b;
+             c.next=merge(a,b.next);
+         }
+         return c;
+     }
+    // function to find mid point
+    public ListNode midPoint(ListNode head){
+        ListNode slow=head;
+         ListNode fast=head;
+        while(fast!=null  && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+
+    
+    public ListNode sortList(ListNode head) {
+        //base case
+        if(head==null || head.next==null) return head;
+        //rec case
+        ListNode mid=midPoint(head); // to find mid
+        
+        //break at mid
+        ListNode a=head;
+        ListNode b= mid.next;
+        mid.next=null;
+        //rec sort
+         a=sortList(a);
+         b=sortList(b);
+        //merge
+        return merge(a,b);
+    }
+    
+}
