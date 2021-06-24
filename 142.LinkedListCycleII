@@ -1,0 +1,24 @@
+public class Solution {
+  
+    public ListNode detectCycle(ListNode head) {
+          ListNode fastPtr=head;
+        ListNode slowPtr=head;
+             ListNode temp=head;
+         while(fastPtr!=null && fastPtr.next!=null){
+             slowPtr=slowPtr.next;
+             fastPtr=fastPtr.next.next;
+	if(slowPtr== fastPtr){
+              //here we are taking  temp which starts moving from head 
+			  //and then when the slowPtr and temp meet each other that will be the starting node of cycle
+           while(temp!=slowPtr){
+            temp=temp.next;
+            slowPtr=slowPtr.next;
+        }
+        return temp;
+             }
+               
+         }
+        return null;
+
+    }
+}
