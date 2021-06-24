@@ -1,10 +1,16 @@
+//two pointers approach
+
 public class Solution {
     public boolean hasCycle(ListNode head) {
+	//both pointers firstly will point to head
         ListNode fastPtr=head;
         ListNode slowPtr=head;
+		
          while(fastPtr!=null && fastPtr.next!=null){
+		 //now slowPtr will move one step forward and fastPtr will move two steps
              slowPtr=slowPtr.next;
              fastPtr=fastPtr.next.next;
+			 // at one point both will point to same node and hence we found a cycle if  present 
              if(slowPtr== fastPtr)
                  return true;// we found cycle
              
