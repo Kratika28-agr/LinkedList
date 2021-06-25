@@ -1,0 +1,30 @@
+step 1: 
+we use 4 pointers - Previous,Current,Forward,temp
+step2:
+ Previous.next=forward
+step3:
+ update forward.next=current;
+ step4:
+ update current.next=temp;
+ step5:
+ update previous=current;
+ 
+ class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode  dummy=new ListNode(-1);
+        dummy.next=previous;
+        ListNode  previous=dummy;
+             while(previous.next!=null && previous.next.next!=null){
+            ListNode  current = previous.next;
+            ListNode  forward = current.next;
+             ListNode temp=forward.next;
+             
+                previous.next=forward;
+                 forward.next=current;
+                 current.next =temp;
+                 
+                 
+         previous=current;
+         }
+        return dummy.next;
+        }
